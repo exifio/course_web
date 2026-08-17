@@ -1,0 +1,33 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--primary-300);
+  color: var(--primary-700);
+  background-color: var(--primary-50);
+}
+
+.selected {
+  background-color: var(--primary-600);
+  border-color: var(--primary-600);
+  color: var(--white);
+}
+
+.selected:hover:not(:disabled) {
+  background-color: var(--primary-700);
+  border-color: var(--primary-700);
+  color: var(--white);
+}

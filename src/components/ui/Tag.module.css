@@ -1,0 +1,35 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-10);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-weight);
+  line-height: var(--text-caption-line-height);
+  white-space: nowrap;
+}
+
+.default {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
+}
+
+.accent {
+  background-color: var(--color-accent-200);
+  color: var(--color-accent-900);
+}
+
+/* 정적 정보 표시용 Detail Hero Tag Pill.
+   Switch/Toggle이 아닌 비인터랙티브 정보 배지로, brand token만 사용한다. */
+.brand {
+  min-height: 38px;
+  padding: 4px 16px;
+  border: 1px solid var(--color-primary-100);
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: var(--radius-pill);
+}

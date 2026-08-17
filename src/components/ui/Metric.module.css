@@ -1,0 +1,36 @@
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.valueGroup {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.value {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.unit {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 767px) {
+  .value {
+    font-size: 22px;
+  }
+}

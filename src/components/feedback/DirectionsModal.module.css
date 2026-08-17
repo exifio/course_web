@@ -1,0 +1,88 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background-color: rgba(15, 23, 42, 0.48);
+  animation: backdropFade 150ms ease-out;
+}
+
+.modal {
+  position: relative;
+  width: min(100%, 440px);
+  border-radius: var(--radius-modal, 16px);
+  background-color: var(--surface, #ffffff);
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(16, 24, 40, 0.16);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm, 8px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--gray-500);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.closeButton:hover {
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary-50);
+  color: var(--primary-600);
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 28px;
+}
+
+.description {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.actionButton {
+  width: 100%;
+}
+
+@keyframes backdropFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

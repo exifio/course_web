@@ -1,0 +1,39 @@
+.metrics {
+  display: flex;
+  gap: 32px;
+  margin: 0;
+  padding: 16px 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-neutral-500, #667085);
+}
+
+.value {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 600;
+  color: var(--color-neutral-900, #101828);
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .metrics {
+    gap: 20px;
+    padding: 12px 0;
+  }
+
+  .value {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}

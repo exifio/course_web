@@ -1,0 +1,154 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-neutral-200, #e4e9f0);
+  background-color: var(--color-neutral-100, #f5f7fa);
+  aspect-ratio: 16 / 9;
+}
+
+.track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-x;
+  outline: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:focus-visible {
+  box-shadow: 0 0 0 3px var(--primary-400, #6f9be0);
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: center;
+  display: flex;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: rgba(16, 24, 40, 0.66);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary, #1e293b);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.16);
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+  z-index: 2;
+}
+
+.arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.arrow:hover:not(:disabled) {
+  background-color: #ffffff;
+}
+
+.arrow:disabled {
+  opacity: 0;
+  cursor: default;
+  pointer-events: none;
+}
+
+.arrowPrev {
+  left: 12px;
+}
+
+.arrowNext {
+  right: 12px;
+}
+
+.indicators {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.dotActive {
+  width: 18px;
+  background-color: #ffffff;
+}
+
+@media (min-width: 1024px) {
+  .carousel {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel {
+    aspect-ratio: 4 / 3;
+  }
+
+  .arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+}

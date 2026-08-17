@@ -1,0 +1,172 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  height: 40px;
+}
+
+.line {
+  height: 16px;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  height: 26px;
+  width: 72px;
+  border-radius: 9999px;
+}
+
+.metricsRow {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border, #e4e9f0);
+  border-bottom: 1px solid var(--border, #e4e9f0);
+}
+
+.metric {
+  height: 44px;
+  width: 88px;
+}
+
+.routeColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.routeImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--gray-100);
+  border-radius: var(--radius-card, 16px);
+  animation: skeleton-pulse-detail 1.4s ease-in-out infinite;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.actionButton {
+  height: 48px;
+  min-width: 120px;
+  flex: 1;
+  max-width: 180px;
+  border-radius: var(--radius-button, 12px);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.infoCard {
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e4e9f0);
+  border-radius: var(--radius-card, 16px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoCardTitle {
+  height: 20px;
+}
+
+.infoLine {
+  height: 14px;
+}
+
+@keyframes skeleton-pulse-detail {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeImage {
+    animation: none;
+  }
+}
+
+@media (max-width: 1199px) {
+  .hero {
+    gap: 32px;
+  }
+
+  .infoGrid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .routeColumn {
+    order: 2;
+  }
+
+  .summary {
+    order: 1;
+  }
+
+  .actions {
+    order: 3;
+    justify-content: stretch;
+  }
+
+  .actionButton {
+    flex: 1;
+    max-width: none;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    height: 36px;
+  }
+
+  .metricsRow {
+    gap: 20px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actionButton {
+    width: 100%;
+  }
+}

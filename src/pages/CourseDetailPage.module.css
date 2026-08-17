@@ -1,0 +1,256 @@
+.page {
+  width: min(calc(100% - 64px), 1200px);
+  margin: 0 auto;
+  padding: 40px 0 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.detailHeroSurface {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 40px;
+  align-items: stretch;
+  background: var(--color-neutral-0, #ffffff);
+  border: 1px solid var(--color-neutral-200, #e4e9f0);
+  border-radius: var(--radius-lg, 16px);
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.courseInfoPanel {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.heroIntroGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.courseName {
+  font-size: clamp(2.25rem, 3.2vw, 3rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+  margin: 0;
+}
+
+.summaryText {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #475467);
+  margin: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tagItem {
+  list-style: none;
+}
+
+.metricsGroup {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border, #e4e9f0);
+}
+
+.heroMetric {
+  min-width: 0;
+}
+
+.routePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.actionRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.primaryAction,
+.saveAction {
+  width: 100%;
+  min-height: 56px;
+  height: 56px;
+  border-radius: var(--radius-button, 12px);
+  font-weight: 600;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0 20px;
+}
+
+.saveIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.savedState {
+  background-color: var(--primary-50, #edf2fa);
+  color: var(--primary-700, #385896);
+  border-color: var(--primary-200, #adc3ea);
+}
+
+.savedState:hover:not(:disabled) {
+  background-color: var(--primary-100, #c7d6f1);
+  border-color: var(--primary-300, #87a8e2);
+  color: var(--primary-800, #2b4474);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modalText {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-secondary, #475467);
+  margin: 0;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  gap: 16px;
+  min-height: 60vh;
+}
+
+.errorTitle {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+  margin: 0;
+}
+
+.errorDescription {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-secondary, #475467);
+  margin: 0;
+}
+
+.errorCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 180px;
+  padding: 0 24px;
+  border-radius: var(--radius-button, 10px);
+  background-color: var(--primary-600, #4f7dd4);
+  color: var(--white, #ffffff);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.errorCta:hover {
+  background-color: var(--primary-700, #4872c1);
+}
+
+@media (max-width: 1199px) {
+  .page {
+    width: min(calc(100% - 48px), 1200px);
+    padding: 32px 0 48px;
+    gap: 40px;
+  }
+
+  .detailHeroSurface {
+    gap: 32px;
+    padding: 28px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .detailHeroSurface {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .courseInfoPanel {
+    height: auto;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    width: calc(100% - 32px);
+    padding: 24px 0 64px;
+    gap: 32px;
+  }
+
+  .detailHeroSurface {
+    padding: 24px;
+  }
+
+  .courseName {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .metricsGroup {
+    gap: 16px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actionRow {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .actionRow > * {
+    width: 100%;
+    min-height: 52px;
+  }
+}

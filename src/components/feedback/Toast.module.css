@@ -1,0 +1,139 @@
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 60;
+  width: min(380px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border, #e4e9f0);
+  border-radius: var(--radius-toast, 12px);
+  background-color: var(--surface, #ffffff);
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+  animation: toastIn 150ms ease-out;
+}
+
+.contentRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.iconSaved {
+  background-color: var(--success-bg, #eef8f1);
+  color: var(--success, #2f8a52);
+}
+
+.iconUnsaved {
+  background-color: var(--gray-100, #f1f4f8);
+  color: var(--gray-600, #475467);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--text-primary, #101828);
+  margin: 0;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--text-secondary, #667085);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.viewSaved,
+.close {
+  min-height: 36px;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--motion-fast);
+}
+
+.viewSaved {
+  color: var(--primary-600, #4872c1);
+}
+
+.close {
+  color: var(--gray-600, #475467);
+}
+
+.viewSaved:hover {
+  background-color: var(--primary-50, #edf2fa);
+}
+
+.close:hover {
+  background-color: var(--gray-100, #f1f4f8);
+}
+
+.viewSaved:focus-visible,
+.close:focus-visible {
+  outline: 2px solid var(--primary-300, #87a8e2);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .toast {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    width: auto;
+    max-width: 380px;
+    margin-inline: auto;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

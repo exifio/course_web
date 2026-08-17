@@ -1,0 +1,22 @@
+.notice {
+  padding: var(--space-16) var(--space-20);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-primary-50);
+  border: 1px solid var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+.title {
+  display: block;
+  font-size: var(--text-body-s-font-size);
+  font-weight: var(--text-label-weight);
+  line-height: var(--text-body-s-line-height);
+  margin-bottom: var(--space-4);
+}
+
+.description {
+  font-size: var(--text-caption-font-size);
+  line-height: var(--text-caption-line-height);
+  color: var(--color-primary-700);
+  margin: 0;
+}

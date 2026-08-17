@@ -1,0 +1,38 @@
+{
+  "name": "course_app",
+  "version": "1.0.0",
+  "description": "의정부 지역 러너가 새로운 러닝 코스를 빠르게 탐색하고, 안전성·노면·편의시설·분위기 정보를 확인한 뒤 코스를 저장하거나 길찾기 의향을 표현할 수 있는 Sprint 6 프론트엔드 MVP입니다.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "vite build",
+    "dev": "vite dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.4",
+    "jsdom": "^30.0.1",
+    "playwright": "^1.62.1",
+    "vitest": "^4.1.10"
+  }
+}

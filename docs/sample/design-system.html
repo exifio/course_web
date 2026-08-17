@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sprint 6 Design System — Uijeongbu Running Course Web MVP</title>
+  <style>
+    /* === CSS 변수 (Design System 토큰 기반) === */
+    :root {
+      /* Neutral */
+      --neutral-0: #ffffff;
+      --neutral-50: #f7f9fc;
+      --neutral-100: #f1f3f7;
+      --neutral-200: #e3e6ed;
+      --neutral-300: #ccd1db;
+      --neutral-500: #7c8493;
+      --neutral-700: #4a515f;
+      --neutral-900: #1a202b;
+
+      /* Primary — Blue */
+      --primary-50: #edf2fa;
+      --primary-100: #c7d6f1;
+      --primary-200: #adc3ea;
+      --primary-300: #87a8e2;
+      --primary-400: #7097dc;
+      --primary-500: #4f7dd4;
+      --primary-600: #4872c1;
+      --primary-700: #385896;
+      --primary-800: #2b4474;
+      --primary-900: #203459;
+
+      /* Accent — Lime */
+      --accent-50: #fdffee;
+      --accent-100: #f7ffc9;
+      --accent-200: #f3ffb1;
+      --accent-300: #eefe8f;
+      --accent-400: #eafe7d;
+      --accent-500: #e5fe65;
+      --accent-600: #d1e75c;
+      --accent-700: #a2b447;
+      --accent-800: #7e8b37;
+      --accent-900: #606b29;
+
+      /* Semantic */
+      --success: #55a472;
+      --warning: #e7a948;
+      --danger: #d45d58;
+      --information: #4f7dd4;
+      --surface-safety: #edf8f1;
+      --surface-warning: #fdf5e1;
+      --surface-danger: #faedec;
+
+      /* Layout */
+      --page-bg: var(--neutral-50);
+      --card-surface: var(--neutral-0);
+      --text-primary: var(--neutral-900);
+      --text-secondary: var(--neutral-700);
+      --text-tertiary: var(--neutral-500);
+      --border: var(--neutral-200);
+
+      /* Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-pill: 999px;
+
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(26, 32, 43, 0.06);
+      --shadow-md: 0 8px 24px rgba(26, 32, 43, 0.10);
+
+      /* Spacing 스케일 */
+      --space-4: 4px;
+      --space-8: 8px;
+      --space-12: 12px;
+      --space-16: 16px;
+      --space-20: 20px;
+      --space-24: 24px;
+      --space-32: 32px;
+      --space-40: 40px;
+      --space-48: 48px;
+      --space-64: 64px;
+      --space-80: 80px;
+
+      /* Transition */
+      --transition-base: 150ms ease-out;
+    }
+
+    /* === 베이스 스타일 === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--page-bg);
+      color: var(--text-primary);
+      font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* 타이포그래피 시스템 (Design System 기반) */
+    .display { font-size: 36px; line-height: 1.2; font-weight: 700; }
+    .h1     { font-size: 32px; line-height: 1.25; font-weight: 700; }
+    .h2     { font-size: 24px; line-height: 1.33; font-weight: 700; }
+    .h3     { font-size: 20px; line-height: 1.4; font-weight: 600; }
+    .body   { font-size: 16px; line-height: 1.5; font-weight: 400; }
+    .body-s { font-size: 14px; line-height: 1.43; font-weight: 400; }
+    .label  { font-size: 14px; line-height: 1.43; font-weight: 600; }
+    .caption{ font-size: 12px; line-height: 1.5; font-weight: 400; }
+
+    .text-primary   { color: var(--text-primary); }
+    .text-secondary { color: var(--text-secondary); }
+    .text-tertiary  { color: var(--text-tertiary); }
+
+    a { color: var(--primary-500); }
+
+    /* === 레이아웃 === */
+    .page-header {
+      background: var(--card-surface);
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-24) 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .page-header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .page-header .meta {
+      display: flex;
+      gap: var(--space-12);
+      align-items: center;
+      margin-top: var(--space-8);
+    }
+
+    .page-header .badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--neutral-100);
+      color: var(--neutral-700);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-40) 32px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-32);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-24);
+    }
+
+    @media (max-width: 767px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: var(--space-24) 16px;
+      }
+    }
+
+    /* === 섹션 === */
+    .section {
+      margin-bottom: var(--space-48);
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: var(--space-24);
+      padding-bottom: var(--space-12);
+      border-bottom: 2px solid var(--primary-500);
+      display: inline-block;
+    }
+
+    .subsection-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: var(--space-24) 0 var(--space-16);
+      color: var(--text-primary);
+    }
+
+    /* === 카드 === */
+    .card {
+      background: var(--card-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-24);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* === 토큰 스와치 === */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-12);
+      margin-bottom: var(--space-16);
+    }
+
+    @media (max-width: 767px) {
+      .token-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .token-swatch {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .token-swatch .swatch {
+      width: 100%;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .token-swatch .hex {
+      font-size: 12px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      color: var(--text-tertiary);
+      word-break: break-all;
+    }
+
+    .token-swatch .label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* === 컬러 팔레트 히든 라인 === */
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+      gap: 1px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: var(--space-12);
+    }
+
+    .color-palette .color-cell {
+      height: 32px;
+      position: relative;
+    }
+
+    .color-palette .color-cell .cell-value {
+      position: absolute;
+      bottom: 2px;
+      left: 4px;
+      font-size: 10px;
+      font-family: "SF Mono", monospace;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .color-palette .color-cell .cell-value.dark-text {
+      color: rgba(0, 0, 0, 0.7);
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 767px) {
+      .color-palette {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    /* === 타이포그래피 샘플 === */
+    .typo-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: var(--space-16);
+    }
+
+    .typo-table th,
+    .typo-table td {
+      text-align: left;
+      padding: var(--space-12) var(--space-16);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .typo-table th {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+    }
+
+    .typo-table td:first-child {
+      width: 120px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* === 스페이싱 체크보드 === */
+    .space-checkboard {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: var(--space-12);
+    }
+
+    .space-checkboard .space-step {
+      width: var(--space-40);
+      height: 48px;
+      background: var(--card-surface);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: var(--space-8);
+    }
+
+    .space-checkboard .space-step .value {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      font-family: "SF Mono", monospace;
+    }
+
+    /* 반응형 태그 === */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      line-height: 1.6;
+    }
+
+    .tag-neutral { background: var(--neutral-100); color: var(--neutral-700); }
+    .tag-recommend { background: var(--accent-100); color: var(--accent-900); }
+    .tag-danger { background: var(--surface-danger); color: var(--danger); }
+
+    /* === 버튼 컴포넌트 샘플 === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: background-color var(--transition-base);
+      height: 44px;
+      padding: 0 var(--space-20);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--primary-300);
+      outline-offset: 2px;
+    }
+
+    .btn:disabled {
+      background: var(--neutral-100);
+      color: var(--neutral-300);
+      border-color: var(--neutral-200);
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--primary-600);
+      color: #fff;
+    }
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary.state-hover,
+    .btn-primary.state-pressed { background: var(--primary-700); }
+
+    .btn-primary.state-focus {
+      background: var(--primary-600);
+      outline: 2px solid var(--primary-300);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      background: var(--neutral-0);
+      color: var(--neutral-900);
+      border: 1px solid var(--neutral-200);
+    }
+    .btn-secondary:hover { background: var(--neutral-100); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--primary-500);
+    }
+    .btn-ghost:hover { background: var(--primary-50); }
+
+    .btn-primary:disabled {
+      background: var(--neutral-100);
+      color: var(--neutral-300);
+    }
+
+    .btn-lg { height: 48px; padding: 0 var(--space-24); }
+
+    /* === 컴포넌트 카드 === */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-20);
+    }
+
+    @media (max-width: 767px) {
+      .component-grid { grid-template-columns: 1fr; }
+    }
+
+    .component-card {
+      background: var(--card-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .component-card .component-preview {
+      background: var(--neutral-50);
+      padding: var(--space-20);
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .component-card .component-info {
+      padding: var(--space-16);
+    }
+
+    /* === 코스 카드 데모 === */
+    .course-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      background: var(--neutral-0);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .course-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .course-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, var(--neutral-200), var(--neutral-300));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .course-body {
+      padding: var(--space-16);
+    }
+
+    .course-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: var(--space-8);
+    }
+
+    .course-meta {
+      display: flex;
+      gap: var(--space-12);
+      margin-bottom: var(--space-8);
+    }
+
+    .course-meta-item {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .course-tags {
+      display: flex;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    /* === 반응형 브레이크포인트 표 === */
+    .breakpoint-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .breakpoint-table th,
+    .breakpoint-table td {
+      padding: var(--space-12) var(--space-16);
+      text-align: center;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .breakpoint-table th {
+      font-weight: 600;
+      background: var(--neutral-50);
+    }
+
+    /* === 도표/표 === */
+    .rule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-16) 0;
+    }
+
+    .rule-table th,
+    .rule-table td {
+      padding: var(--space-12) var(--space-16);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .rule-table th {
+      font-weight: 600;
+      color: var(--text-tertiary);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .rule-table td:first-child {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .rule-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-12) 0;
+    }
+
+    .rule-list li {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-12);
+    }
+
+    .rule-list li:last-child {
+      border-bottom: none;
+    }
+
+    .rule-list .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neutral-500);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* === Do / Don't === */
+    .dos-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+
+    @media (max-width: 767px) {
+      .dos-container { grid-template-columns: 1fr; }
+    }
+
+    .dos-card {
+      padding: var(--space-20);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    .dos-card.do {
+      background: var(--surface-safety);
+      border-color: var(--success);
+    }
+
+    .dos-card.donot {
+      background: var(--surface-danger);
+      border-color: var(--danger);
+    }
+
+    .dos-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: var(--space-12);
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .dos-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .dos-card li {
+      padding: var(--space-8) 0;
+      font-size: 13px;
+      border-bottom: 1px dashed var(--neutral-300);
+    }
+
+    .dos-card li:last-child {
+      border-bottom: none;
+    }
+
+    /* === 원본 출처 === */
+    .source-box {
+      background: var(--neutral-50);
+      border-radius: var(--radius-md);
+      padding: var(--space-16);
+      font-size: 13px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .source-box code {
+      background: var(--neutral-100);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      color: var(--primary-700);
+    }
+
+    /* 스크롤 가이드 */
+    .scroll-guide {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-12) var(--space-16);
+      box-shadow: var(--shadow-md);
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      cursor: pointer;
+      transition: transform var(--transition-base);
+      font-family: inherit;
+      appearance: none;
+    }
+
+    .scroll-guide:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(26, 32, 43, 0.12);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 헤더 ===== -->
+  <header class="page-header">
+    <h1>Sprint 6 Design System</h1>
+    <div class="meta">
+      <span class="badge">UIJEONGBU Running Course Web MVP</span>
+      <span class="badge">Draft v0.2</span>
+      <span class="badge">2026-08-15 기준</span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== 1. Design Principles ===== -->
+    <section class="section" data-od-id="principles">
+      <h2 class="section-title">1. Design Principles</h2>
+      <ul class="rule-list">
+        <li><span class="dot"></span><strong>Desktop-first, Mobile-safe</strong>: 데스크톱 공간을 적극 활용하되 768px 미만에서도 핵심 흐름이 깨지지 않는다.</li>
+        <li><span class="dot"></span><strong>Image-first Discovery</strong>: 코스 사진과 경로 이미지가 탐색 경험의 첫 번째 시각 정보가 된다.</li>
+        <li><span class="dot"></span><strong>Fast Judgment</strong>: 거리·시간·난이도·안전성·노면·편의시설·분위기를 짧은 카드와 태그로 빠르게 읽게 한다.</li>
+        <li><span class="dot"></span><strong>Clear Action</strong>: Primary Blue는 저장·길찾기·주요 CTA 등 핵심 행동에 우선 사용한다.</li>
+        <li><span class="dot"></span><strong>Soft & Clean</strong>: 밝은 배경, 큰 Radius, 얇은 Border, 약한 Shadow로 기존 앱의 가벼운 인상을 유지한다.</li>
+        <li><span class="dot"></span><strong>Platform-independent Core</strong>: Color·Typography·Spacing·Radius의 의미는 향후 React Native + Expo에서도 재사용 가능해야 한다.</li>
+      </ul>
+
+      <h3 class="subsection-title">핵심 원칙 요약</h3>
+      <table class="rule-table">
+        <thead>
+          <tr><th>원칙</th><th>핵심 내용</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Desktop-first, Mobile-safe</td><td>데스크탑 우선 설계 / 768px 미만에서도 흐름 유지</td></tr>
+          <tr><td>Image-first Discovery</td><td>코스 사진을 탐색의 첫 시각 정보로</td></tr>
+          <tr><td>Fast Judgment</td><td>짧은 카드 + 태그로 빠른 판단</td></tr>
+          <tr><td>Clear Action</td><td>Primary Blue = 핵심 CTA</td></tr>
+          <tr><td>Soft & Clean</td><td>밝은 배경, 큰 라디우스, 얇은 보더</td></tr>
+          <tr><td>Platform-independent</td><td>토큰 이름은 RN/Expo에서 재사용</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== 2. Color Tokens ===== -->
+    <section class="section" data-od-id="colors">
+      <h2 class="section-title">2. Color Tokens</h2>
+
+      <div class="grid-2">
+
+        <!-- Primary Blue -->
+        <div>
+          <h3 class="subsection-title">Primary — Blue</h3>
+          <div class="color-palette">
+            <div class="color-cell" style="background:#edf2fa;"><span class="cell-value dark-text">50</span></div>
+            <div class="color-cell" style="background:#c7d6f1;"><span class="cell-value dark-text">100</span></div>
+            <div class="color-cell" style="background:#adc3ea;"><span class="cell-value dark-text">200</span></div>
+            <div class="color-cell" style="background:#87a8e2;"><span class="cell-value dark-text">300</span></div>
+            <div class="color-cell" style="background:#7097dc;"><span class="cell-value dark-text">400</span></div>
+            <div class="color-cell" style="background:#4f7dd4;"><span class="cell-value">500</span></div>
+            <div class="color-cell" style="background:#4872c1;"><span class="cell-value">600</span></div>
+            <div class="color-cell" style="background:#385896;"><span class="cell-value">700</span></div>
+            <div class="color-cell" style="background:#2b4474;"><span class="cell-value">800</span></div>
+            <div class="color-cell" style="background:#203459;"><span class="cell-value">900</span></div>
+          </div>
+          <table class="rule-table">
+            <thead><tr><th>Token</th><th>Hex</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>primary-500</td><td>#4F7DD4</td><td>Brand / Icon / Selection</td></tr>
+              <tr><td>primary-600</td><td>#4872C1</td><td>기본 Primary CTA</td></tr>
+              <tr><td>primary-700</td><td>#385896</td><td>Hover / Pressed / 강조 텍스트</td></tr>
+              <tr><td>primary-300</td><td>#87A8E2</td><td>Focus ring</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Accent Lime -->
+        <div>
+          <h3 class="subsection-title">Accent — Lime</h3>
+          <div class="color-palette">
+            <div class="color-cell" style="background:#fdffee;"><span class="cell-value dark-text">50</span></div>
+            <div class="color-cell" style="background:#f7ffc9;"><span class="cell-value dark-text">100</span></div>
+            <div class="color-cell" style="background:#f3ffb1;"><span class="cell-value dark-text">200</span></div>
+            <div class="color-cell" style="background:#eefe8f;"><span class="cell-value dark-text">300</span></div>
+            <div class="color-cell" style="background:#eafe7d;"><span class="cell-value dark-text">400</span></div>
+            <div class="color-cell" style="background:#e5fe65;"><span class="cell-value dark-text">500</span></div>
+            <div class="color-cell" style="background:#d1e75c;"><span class="cell-value dark-text">600</span></div>
+            <div class="color-cell" style="background:#a2b447;"><span class="cell-value">700</span></div>
+            <div class="color-cell" style="background:#7e8b37;"><span class="cell-value">800</span></div>
+            <div class="color-cell" style="background:#606b29;"><span class="cell-value">900</span></div>
+          </div>
+          <table class="rule-table">
+            <thead><tr><th>Token</th><th>Hex</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>accent-100~400</td><td>#F7FFC9 ~ #EAFE7D</td><td>추천 태그 / Badge surface</td></tr>
+              <tr><td>accent-900</td><td>#606B29</td><td>추천 태그 / Badge 텍스트</td></tr>
+              <tr><td>accent-500</td><td>#E5FE65</td><td>강한 Highlight</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Neutral -->
+      <h3 class="subsection-title">Neutral</h3>
+      <div class="color-palette">
+        <div class="color-cell" style="background:#ffffff;"><span class="cell-value dark-text">0</span></div>
+        <div class="color-cell" style="background:#f7f9fc;"><span class="cell-value dark-text">50</span></div>
+        <div class="color-cell" style="background:#f1f3f7;"><span class="cell-value dark-text">100</span></div>
+        <div class="color-cell" style="background:#e3e6ed;"><span class="cell-value dark-text">200</span></div>
+        <div class="color-cell" style="background:#ccd1db;"><span class="cell-value dark-text">300</span></div>
+        <div class="color-cell" style="background:#7c8493;"><span class="cell-value">500</span></div>
+        <div class="color-cell" style="background:#4a515f;"><span class="cell-value">700</span></div>
+        <div class="color-cell" style="background:#1a202b;"><span class="cell-value">900</span></div>
+      </div>
+
+      <!-- Semantic -->
+      <h3 class="subsection-title">Semantic</h3>
+      <div class="token-grid" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="token-swatch"><div class="swatch" style="background:var(--success);"></div><div class="label">success</div><div class="hex">#55A472</div></div>
+        <div class="token-swatch"><div class="swatch" style="background:var(--warning);"></div><div class="label">warning</div><div class="hex">#E7A948</div></div>
+        <div class="token-swatch"><div class="swatch" style="background:var(--danger);"></div><div class="label">danger</div><div class="hex">#D45D58</div></div>
+        <div class="token-swatch"><div class="swatch" style="background:var(--information);"></div><div class="label">information</div><div class="hex">#4F7DD4</div></div>
+        <div class="token-swatch"><div class="swatch" style="background:var(--surface-safety);"></div><div class="label">surface-safety</div><div class="hex">#EDF8F1</div></div>
+        <div class="token-swatch"><div class="swatch" style="background:var(--surface-warning);"></div><div class="label">surface-warning</div><div class="hex">#FDF5E1</div></div>
+        <div class="token-swatch"><div class="swatch" style="background:var(--surface-danger);"></div><div class="label">surface-danger</div><div class="hex">#FAEDEC</div></div>
+      </div>
+
+      <!-- Semantic Usage -->
+      <h3 class="subsection-title">Semantic Usage</h3>
+      <table class="rule-table">
+        <thead><tr><th>역할</th><th>토큰</th></tr></thead>
+        <tbody>
+          <tr><td>Page background</td><td>neutral-50</td></tr>
+          <tr><td>Card / Header / Modal surface</td><td>neutral-0</td></tr>
+          <tr><td>Primary text</td><td>neutral-900</td></tr>
+          <tr><td>Secondary text</td><td>neutral-700</td></tr>
+          <tr><td>Tertiary text / metadata</td><td>neutral-500</td></tr>
+          <tr><td>Border</td><td>neutral-200</td></tr>
+          <tr><td>Primary action</td><td>primary-600</td></tr>
+          <tr><td>Primary Hover / Pressed</td><td>primary-700</td></tr>
+                  </tbody>
+      </table>
+
+      <div class="source-box">
+        <strong>규칙:</strong> Accent Lime는 추천/Highlight에 제한하고 긴 본문 텍스트에는 사용하지 않는다.
+        Danger는 실제 오류·위험에만 사용하며 Empty State의 기본 색상으로 사용하지 않는다.
+      </div>
+    </section>
+
+    <!-- ===== 3. Typography ===== -->
+    <section class="section" data-od-id="typography">
+      <h2 class="section-title">3. Typography</h2>
+      <div class="source-box" style="margin-bottom: var(--space-24);">
+        기본 서체: <code>Pretendard Variable</code> → <code>-apple-system</code>, <code>BlinkMacSystemFont</code>, <code>Segoe UI</code>, <code>sans-serif</code>
+      </div>
+
+      <table class="typo-table">
+        <thead>
+          <tr>
+            <th>Style</th><th>Size / Line</th><th>Weight</th><th>Usage</th><th>샘플</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Display</td><td>36 / 44</td><td>700</td><td>Home 핵심 헤드라인</td>
+            <td class="display text-primary">Running Course</td>
+          </tr>
+          <tr>
+            <td>H1</td><td>32 / 40</td><td>700</td><td>페이지 제목 / 코스명</td>
+            <td class="h1 text-primary">코스 상세 페이지</td>
+          </tr>
+          <tr>
+            <td>H2</td><td>24 / 32</td><td>700</td><td>주요 섹션 제목</td>
+            <td class="h2 text-primary">추천 코스</td>
+          </tr>
+          <tr>
+            <td>H3</td><td>20 / 28</td><td>600</td><td>카드 내부 제목</td>
+            <td class="h3 text-primary">안전성 정보</td>
+          </tr>
+          <tr>
+            <td>Body</td><td>16 / 24</td><td>400</td><td>기본 본문</td>
+            <td class="body text-primary">코스의 전체적인 난이도와 경로를 확인하세요.</td>
+          </tr>
+          <tr>
+            <td>Body-S</td><td>14 / 20</td><td>400</td><td>설명 / 메타 정보</td>
+            <td class="body-s text-secondary">거리 5.2km · 소요 시간 35분</td>
+          </tr>
+          <tr>
+            <td>Label</td><td>14 / 20</td><td>600</td><td>Button / Navigation</td>
+            <td class="label text-primary">저장하기</td>
+          </tr>
+          <tr>
+            <td>Caption</td><td>12 / 18</td><td>400</td><td>태그 / 보조 정보</td>
+            <td class="caption text-tertiary">실시간 업데이트</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="source-box">
+        <strong>모바일 축소:</strong> Display → 30/38, H1 → 28/36. 본문은 14px 미만으로 축소하지 않는다. Caption만 12px을 허용한다.
+      </div>
+    </section>
+
+    <!-- ===== 4. Spacing & Shape ===== -->
+    <section class="section" data-od-id="spacing-shape">
+      <h2 class="section-title">4. Spacing & Shape</h2>
+
+      <h3 class="subsection-title">Spacing Scale</h3>
+      <div class="space-checkboard">
+        <div class="space-step" style="height: var(--space-4);"><span class="value">4</span></div>
+        <div class="space-step" style="height: var(--space-8);"><span class="value">8</span></div>
+        <div class="space-step" style="height: var(--space-12);"><span class="value">12</span></div>
+        <div class="space-step" style="height: var(--space-16);"><span class="value">16</span></div>
+        <div class="space-step" style="height: var(--space-20);"><span class="value">20</span></div>
+        <div class="space-step" style="height: var(--space-24);"><span class="value">24</span></div>
+        <div class="space-step" style="height: var(--space-32);"><span class="value">32</span></div>
+        <div class="space-step" style="height: var(--space-40);"><span class="value">40</span></div>
+        <div class="space-step" style="height: var(--space-48);"><span class="value">48</span></div>
+        <div class="space-step" style="height: var(--space-64);"><span class="value">64</span></div>
+        <div class="space-step" style="height: var(--space-80);"><span class="value">80</span></div>
+      </div>
+
+      <h3 class="subsection-title">Shape — Radius</h3>
+      <table class="rule-table">
+        <thead><tr><th>토큰</th><th>값</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td>radius-sm</td><td>8px</td><td>일반 요소</td></tr>
+          <tr><td>radius-md</td><td>12px</td><td>Button</td></tr>
+          <tr><td>radius-lg</td><td>16px</td><td>CourseCard</td></tr>
+          <tr><td>radius-xl</td><td>24px</td><td>Modal 상단 (Mobile)</td></tr>
+          <tr><td>radius-pill</td><td>999px</td><td>Tag / Badge</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="subsection-title">Shadow</h3>
+      <table class="rule-table">
+        <thead><tr><th>토큰</th><th>값</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td>shadow-sm</td><td>0 2px 8px rgba(26,32,43,0.06)</td><td>Card 기본</td></tr>
+          <tr><td>shadow-md</td><td>0 8px 24px rgba(26,32,43,0.10)</td><td>Card hover / Modal</td></tr>
+        </tbody>
+      </table>
+
+      <div class="source-box">
+        <strong>간격 규칙:</strong> Page section gap: Desktop 64px / Mobile 40px.
+        Card padding: 20~24px (Desktop) / 16~20px (Mobile).
+        Grid gap: Desktop 24px / Tablet 20px / Mobile 16px.
+      </div>
+    </section>
+
+    <!-- ===== 5. Responsive Layout ===== -->
+    <section class="section" data-od-id="responsive">
+      <h2 class="section-title">5. Responsive Layout</h2>
+
+      <h3 class="subsection-title">Breakpoints</h3>
+      <table class="breakpoint-table">
+        <thead>
+          <tr><th>Desktop</th><th>Tablet</th><th>Mobile</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>≥ 1200px</td><td>768px ~ 1199px</td><td>&lt; 768px</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="subsection-title">Container & Grid</h3>
+      <table class="rule-table">
+        <thead><tr><th>요소</th><th>Desktop</th><th>Tablet</th><th>Mobile</th></tr></thead>
+        <tbody>
+          <tr><td>최대 콘텐츠 폭</td><td>1200px</td><td>1200px</td><td>100%</td></tr>
+          <tr><td>Horizontal padding</td><td>32px</td><td>24px</td><td>16px</td></tr>
+          <tr><td>Home / Saved columns</td><td>3</td><td>2</td><td>1</td></tr>
+          <tr><td>Detail info cards</td><td>2</td><td>2</td><td>1</td></tr>
+          <tr><td>Detail hero ratio</td><td colspan="3">약 7:5 (Route Preview : 핵심 정보)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="source-box">
+        <strong>금지:</strong> 고정 픽셀 폭의 모바일 앱 화면을 Desktop 중앙에 그대로 확대하지 않는다.
+      </div>
+    </section>
+
+    <!-- ===== 6. Navigation ===== -->
+    <section class="section" data-od-id="navigation">
+      <h2 class="section-title">6. Navigation</h2>
+
+      <div class="grid-2">
+        <!-- Desktop / Tablet -->
+        <div class="card">
+          <div style="background:var(--neutral-0); border-bottom:1px solid var(--border); height:68px; display:flex; align-items:center; padding:0 20px;">
+            <div style="font-weight:700; color:var(--primary-500);">LOGO</div>
+            <div style="display:flex; gap:24px; margin-left:auto;">
+              <a href="#" style="color:var(--primary-500); font-size:14px; font-weight:600; padding:12px 4px;">홈</a>
+              <a href="#" style="color:var(--text-tertiary); font-size:14px; font-weight:600; padding:12px 4px;">저장한 코스</a>
+            </div>
+          </div>
+          <div style="padding:16px; font-size:12px; color:var(--text-tertiary);">
+            Top Navigation · 높이 64~72px · 활성 항목: Primary 색상 또는 옅은 Primary surface
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; height:64px; padding:0 20px; border-top:1px solid var(--border); position:relative; background:var(--neutral-0);">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+              <div style="width:24px; height:24px; background:var(--neutral-300); border-radius:4px;"></div>
+              <span style="font-size:11px; font-weight:600; color:var(--text-tertiary);">홈</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+              <div style="width:24px; height:24px; background:var(--neutral-300); border-radius:4px;"></div>
+              <span style="font-size:11px; font-weight:600; color:var(--text-tertiary);">저장</span>
+            </div>
+          </div>
+          <div style="padding:16px; font-size:12px; color:var(--text-tertiary);">
+            Bottom Navigation · 높이 64px · 아이콘 + 11~12px label · MVP: 홈, 저장 2개
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. Core Components ===== -->
+    <section class="section" data-od-id="components">
+      <h2 class="section-title">7. Core Components</h2>
+
+      <!-- Button -->
+      <h3 class="subsection-title">Button</h3>
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-preview" style="flex-direction:column; align-items:flex-start; gap:var(--space-16);">
+            <div style="display:flex; flex-wrap:wrap; gap:var(--space-12);">
+              <button class="btn btn-primary">Default</button>
+              <button class="btn btn-primary state-hover">Hover</button>
+              <button class="btn btn-primary state-pressed">Pressed</button>
+              <button class="btn btn-primary state-focus">Focus</button>
+              <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:var(--space-12);">
+              <button class="btn btn-secondary">Secondary</button>
+              <button class="btn btn-ghost">Ghost</button>
+              <button class="btn btn-primary btn-lg">Important CTA</button>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="body-s text-secondary">
+              <strong>Primary</strong>: primary-600 bg + white text<br/>
+              <strong>Hover / Pressed</strong>: primary-700<br/>
+              <strong>Secondary</strong>: white + neutral-200 border + neutral-900<br/>
+              <strong>Ghost</strong>: transparent + Primary text<br/>
+              <strong>Height</strong>: 기본 44px / 주요 CTA 48px<br/>
+              <strong>Focus</strong>: 2px primary-300 ring + 2px offset<br/>
+              <strong>Disabled</strong>: neutral-100 bg + neutral-300 text
+            </div>
+          </div>
+        </div>
+        <div class="component-card">
+          <div class="component-preview">
+            <div style="display:flex; gap: var(--space-12); align-items: center;">
+              <span class="tag tag-neutral">거리 5.2km</span>
+              <span class="tag tag-recommend">추천 코스</span>
+              <span class="tag tag-danger">주의</span>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="body-s text-secondary">
+              <strong>일반 정보</strong>: neutral-100 + neutral-700<br/>
+              <strong>추천/오늘의 코스</strong>: accent-100~400 surface + accent-900 text<br/>
+              <strong>한 카드 핵심 태그</strong>: 최대 3개 우선 노출<br/>
+              Radius: pill (999px) / text: 12~14px
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CourseCard -->
+      <h3 class="subsection-title">CourseCard</h3>
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-preview" style="padding: 0; border: none;">
+            <div class="course-card" style="max-width: 320px;">
+              <div class="course-image">🖼 Course Image (16:9)</div>
+              <div class="course-body">
+                <div class="course-title">남산 순환로 코스</div>
+                <div class="course-meta">
+                  <span class="course-meta-item">거리 5.2km</span>
+                  <span class="course-meta-item">소요 35분</span>
+                  <span class="course-meta-item">난이도 중간</span>
+                </div>
+                <div class="course-tags">
+                  <span class="tag tag-neutral">조경로</span>
+                  <span class="tag tag-recommend">추천</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="body-s text-secondary">
+              White surface / neutral-200 border / 16px radius / shadow-sm<br/>
+              이미지 16:9 / object-fit: cover<br/>
+              순서: 이미지 → 코스명 → 거리/시간 → 핵심 태그<br/>
+              Hover: shadow-md + 최대 2px 위 이동
+            </div>
+          </div>
+        </div>
+
+        <!-- RoutePreview + MetricItem + InfoCard -->
+        <div class="component-card">
+          <div class="component-info">
+            <div class="body-s text-secondary" style="margin-bottom: var(--space-16);">
+              <strong>RoutePreview</strong>: 정적 이미지/경로 이미지 / Desktop 16:9 / Mobile 4:3 허용 / 16px radius + border / 이미지 실패 시 Neutral fallback
+            </div>
+            <div class="body-s text-secondary" style="margin-bottom: var(--space-16);">
+              <strong>MetricItem</strong>: 아이콘 + 값 + label / Desktop 3 items in a row / Primary를 아이콘 포인트로 / 숫자는 neutral-900
+            </div>
+            <div class="body-s text-secondary">
+              <strong>InfoCard</strong>: 안전성 / 노면 / 편의시설 / 분위기 각각 별도 카드 / H3 제목 / Body-S 세부 정보 / Semantic surface 제한적 사용
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SaveAction -->
+      <h3 class="subsection-title">SaveAction</h3>
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-preview">
+            <div style="display:flex; gap: var(--space-16); align-items: center;">
+              <button class="btn btn-secondary" style="width:120px;">
+                <span style="margin-right:4px;">🔖</span> 저장
+              </button>
+              <button class="btn" style="background:var(--primary-500); color:#fff; width:120px;">
+                <span style="margin-right:4px;">🔖</span> 저장됨
+              </button>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="body-s text-secondary">
+              미저장: outline bookmark + "저장"<br/>
+              저장됨: Primary filled bookmark + "저장됨"<br/>
+              Home / Detail / Saved에서 동일 시각 의미
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. Directions Modal ===== -->
+    <section class="section" data-od-id="directions-modal">
+      <h2 class="section-title">8. Directions Modal</h2>
+      <table class="rule-table">
+        <thead><tr><th>속성</th><th>Desktop</th><th>Mobile</th></tr></thead>
+        <tbody>
+          <tr><td>Trigger</td><td colspan="2">Detail의 길찾기 Primary CTA</td></tr>
+          <tr><td>형태</td><td>중앙 Dialog</td><td>하단 Bottom Sheet</td></tr>
+          <tr><td>Max width</td><td>420px</td><td>Full width</td></tr>
+          <tr><td>Radius</td><td>20px</td><td>상단 24px</td></tr>
+          <tr><td>Overlay</td><td colspan="2">rgba(26,32,43,0.45)</td></tr>
+        </tbody>
+      </table>
+      <ul class="rule-list">
+        <li><span class="dot"></span><strong>제목</strong>: "길찾기를 준비 중이에요"</li>
+        <li><span class="dot"></span><strong>설명</strong>: "현재는 외부 지도 연동을 준비하고 있습니다. 코스 위치를 확인한 뒤 이용해주세요."</li>
+        <li><span class="dot"></span><strong>액션</strong>: "확인" 단일 Primary Button</li>
+        <li><span class="dot"></span><strong>닫기</strong>: ESC / overlay click / 확인 버튼 / 포커스 유지</li>
+      </ul>
+    </section>
+
+    <!-- ===== 9. Empty / Error States ===== -->
+    <section class="section" data-od-id="empty-error">
+      <h2 class="section-title">9. Empty / Error States</h2>
+
+      <h3 class="subsection-title">Saved Empty State</h3>
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-preview">
+            <div style="text-align:center; padding: var(--space-24);">
+              <div style="width:48px; height:48px; background:var(--neutral-200); border-radius:var(--radius-sm); margin:0 auto var(--space-16);"></div>
+              <h3 style="font-size:18px; font-weight:600; margin-bottom:var(--space-8);">저장한 코스가 없어요</h3>
+              <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin-bottom:var(--space-16);">
+                마음에 드는 코스를 저장하면<br/>여기서 확인할 수 있어요.
+              </p>
+              <button class="btn btn-primary btn-lg">추천 코스 보러가기</button>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="body-s text-secondary">
+              bookmark 계열 아이콘 / 짧은 설명 / Primary CTA<br/>
+              Empty는 오류가 아니므로 Danger를 기본 사용하지 않는다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Error States</h3>
+      <table class="rule-table">
+        <thead><tr><th>상황</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>잘못된 Course ID</td><td>명확한 안내 + Home으로 이동하는 CTA</td></tr>
+          <tr><td>이미지 실패</td><td>neutral-100 surface + 간단한 이미지 placeholder</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== 10. Motion & Interaction ===== -->
+    <section class="section" data-od-id="motion">
+      <h2 class="section-title">10. Motion & Interaction</h2>
+      <table class="rule-table">
+        <thead><tr><th>속성</th><th>값</th></tr></thead>
+        <tbody>
+          <tr><td>기본 전환</td><td>150~200ms ease-out</td></tr>
+          <tr><td>적용 대상</td><td>Card hover, 버튼 색상, Modal 등장</td></tr>
+          <tr><td>금지</td><td>과도한 scale, bounce, parallax</td></tr>
+          <tr><td>접근성</td><td>prefers-reduced-motion 사용자에게 motion 제거</td></tr>
+          <tr><td>터치 타깃</td><td>최소 44×44px</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== 11. Web ↔ Future App Reuse ===== -->
+    <section class="section" data-od-id="reuse-rule">
+      <h2 class="section-title">11. Web ↔ Future App Reuse Rule</h2>
+      <ul class="rule-list">
+        <li><span class="dot"></span><strong>토큰 이름</strong>: <code>color.primary.500</code>, <code>space.16</code>, <code>radius.lg</code> — 플랫폼 독립적 의미 유지</li>
+        <li><span class="dot"></span><strong>Web</strong>: CSS Variables로 매핑 (예: <code>--color-primary-500</code>)</li>
+        <li><span class="dot"></span><strong>React Native</strong>: 동일 의미의 TypeScript theme object로 매핑 가능</li>
+        <li><span class="dot"></span><strong>Web-only rule</strong>: hover, breakpoint, Desktop Grid, Top Navigation은 분리</li>
+        <li><span class="dot"></span><strong>금지</strong>: 코스 데이터에 CSS class, JSX, DOM 정보 또는 Web 전용 asset import</li>
+      </ul>
+    </section>
+
+    <!-- ===== 12. Do / Don't ===== -->
+    <section class="section" data-od-id="do-dont">
+      <h2 class="section-title">12. Do / Don't</h2>
+
+      <div class="dos-container">
+        <div class="dos-card do">
+          <h4>✅ Do</h4>
+          <ul>
+            <li>기존 앱의 Blue/Lime, 이미지 중심 카드, 부드러운 Radius, 짧은 정보 카드를 유지한다.</li>
+            <li>Desktop에서 넓은 공간을 Grid와 2열 구조로 활용한다.</li>
+            <li>저장과 길찾기의 우선순위를 명확하게 보여준다.</li>
+            <li>PRD에 정의된 MVP 기능만 UI에 노출한다.</li>
+          </ul>
+        </div>
+
+        <div class="dos-card donot">
+          <h4>❌ Don't</h4>
+          <ul>
+            <li>모바일 앱 화면을 그대로 430px 폭으로 중앙에 배치하지 않는다.</li>
+            <li>검색, 운동, 프로필, 평점 등 Out of Scope 기능을 시안에 있다는 이유만으로 추가하지 않는다.</li>
+            <li>Accent Lime를 긴 본문이나 저대비 텍스트에 사용하지 않는다.</li>
+            <li>카드마다 서로 다른 Radius, Shadow, Button 규칙을 임의로 만들지 않는다.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 13. Source of Truth ===== -->
+    <section class="section" data-od-id="source-of-truth">
+      <h2 class="section-title">13. Source of Truth</h2>
+      <table class="rule-table">
+        <thead><tr><th>문서</th><th>내용</th><th>우선순위</th></tr></thead>
+        <tbody>
+          <tr><td><code>prd.md</code></td><td>제품 범위와 기능</td><td>High (기능 충돌 시)</td></tr>
+          <tr><td><code>design-system.md</code></td><td>시각 규칙과 Responsive UI</td><td>High (시각 충돌 시)</td></tr>
+          <tr><td><code>plan.md</code></td><td>구현 구조와 기술 선택</td><td>Mid</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- 스크롤 가이드 -->
+  <button type="button" class="scroll-guide" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="페이지 맨 위로 이동">
+    ↑ 맨 위로
+  </button>
+
+</body>
+</html>
