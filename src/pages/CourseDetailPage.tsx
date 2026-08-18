@@ -227,7 +227,19 @@ export default function CourseDetailPage({ isLoading = false }: CourseDetailPage
               className={styles.primaryAction}
               onClick={handleDirections}
             >
-              길찾기
+              <svg
+                className={styles.directionsIcon}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polygon points="3 11 22 2 13 21 11 13 3 11" />
+              </svg>
+              <span>길찾기</span>
             </Button>
             <Button
               variant="secondary"

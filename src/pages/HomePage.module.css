@@ -95,9 +95,17 @@
   .filterRow {
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding-bottom: 4px;
+    gap: 8px;
+    padding: 2px 0 6px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .filterRow::-webkit-scrollbar {
+    display: none;
   }
 
   .grid {
