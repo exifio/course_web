@@ -51,9 +51,11 @@ describe('CourseCard', () => {
     expect(handleToggle).toHaveBeenCalledWith(sampleCourse.id);
   });
 
-  test('저장 상태에 따라 aria-pressed 속성이 올바르게 반영된다', () => {
+  test('저장 상태에 따라 버튼 라벨과 aria-pressed 속성이 반영된다', () => {
     const { rerender } = renderCard({ isSaved: false, onToggleSaved: vi.fn() });
-    const saveBtn = screen.getByRole('button', { name: new RegExp(sampleCourse.name) });
+    const saveBtn = screen.getByRole('button', {
+      name: `${sampleCourse.name} 저장`,
+    });
     expect(saveBtn).toHaveAttribute('aria-pressed', 'false');
 
     rerender(
@@ -61,7 +63,9 @@ describe('CourseCard', () => {
         <CourseCard course={sampleCourse} isSaved={true} onToggleSaved={vi.fn()} />
       </MemoryRouter>,
     );
-    const savedBtn = screen.getByRole('button', { name: new RegExp(sampleCourse.name) });
+    const savedBtn = screen.getByRole('button', {
+      name: `${sampleCourse.name} 저장 해제`,
+    });
     expect(savedBtn).toHaveAttribute('aria-pressed', 'true');
   });
 });

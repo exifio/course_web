@@ -1,0 +1,81 @@
+.loginButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--space-16);
+  border-radius: var(--radius-button);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary-600);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+.loginButton:hover {
+  color: var(--color-primary-700);
+  background-color: var(--color-primary-50);
+}
+
+.container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-8);
+  max-width: 240px;
+}
+
+.email {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-neutral-700);
+}
+
+.logoutButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--space-16);
+  border-radius: var(--radius-button);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: all var(--motion-fast);
+}
+
+.logoutButton:hover {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-200);
+  color: var(--color-primary-700);
+}
+
+@media (max-width: 767px) {
+  .container {
+    max-width: 170px;
+  }
+
+  .email {
+    max-width: 84px;
+    font-size: 12px;
+  }
+
+  .logoutButton {
+    padding: 0 var(--space-12);
+    min-height: 40px;
+    font-size: 14px;
+  }
+}

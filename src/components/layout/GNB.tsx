@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import AuthMenu from '../auth/AuthMenu';
 import styles from './GNB.module.css';
 
 export default function GNB() {
@@ -28,7 +29,9 @@ export default function GNB() {
             저장한 코스
           </NavLink>
         </nav>
-        <div className={styles.right} aria-hidden="true" />
+        <div className={styles.right}>
+          <AuthMenu />
+        </div>
       </div>
     </header>
   );

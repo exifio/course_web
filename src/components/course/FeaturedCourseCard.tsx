@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import type { Course, CourseTag } from '../../domain/course';
+import type { Course } from '../../domain/course';
 import { getCourseImageUrl } from '../../utils/courseImage';
 import ImageWithFallback from '../ui/ImageWithFallback';
 import SaveControl from '../ui/SaveControl';
 import CourseMetrics from './CourseMetrics';
+import { getTagLabel } from '../../features/courses/tagLabels';
 import styles from './FeaturedCourseCard.module.css';
 
 export interface FeaturedCourseCardProps {
@@ -11,18 +12,6 @@ export interface FeaturedCourseCardProps {
   isSaved: boolean;
   onToggleSaved: (courseId: string) => void;
 }
-
-const TAG_LABELS: Record<CourseTag, string> = {
-  'night-safe': '야간안심',
-  flat: '평지',
-  beginner: '초보추천',
-  riverside: '수변',
-  park: '공원',
-  forest: '숲',
-  city: '도심',
-  'long-run': '장거리',
-  refresh: '리프레시',
-};
 
 export default function FeaturedCourseCard({
   course,
@@ -50,7 +39,7 @@ export default function FeaturedCourseCard({
           <div className={styles.tags}>
             {course.tags.slice(0, 3).map((tag) => (
               <span key={tag} className={styles.tag}>
-                {TAG_LABELS[tag as CourseTag] || tag.replace(/^#/, '')}
+                {getTagLabel(tag)}
               </span>
             ))}
           </div>

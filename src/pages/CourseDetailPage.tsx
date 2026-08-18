@@ -7,6 +7,7 @@ import type {
   PeopleLevel,
 } from '../domain/course';
 import { useSavedCourses } from '../features/saved/useSavedCourses';
+import { getTagLabel } from '../features/courses/tagLabels';
 import { logEvent } from '../lib/eventLogger';
 import CourseInfoSection from '../features/courses/CourseInfoSection';
 import CourseMediaCarousel from '../components/course/CourseMediaCarousel';
@@ -65,21 +66,8 @@ const surfaceLabel: Record<string, string> = {
   unknown: '정보 없음',
 };
 
-const TAG_LABELS: Record<string, string> = {
-  'night-safe': '야간안심',
-  flat: '평지',
-  beginner: '초보추천',
-  riverside: '수변',
-  park: '공원',
-  forest: '숲',
-  city: '도심',
-  'long-run': '장거리',
-  refresh: '리프레시',
-};
-
 function displayTag(tag: string): string {
-  if (TAG_LABELS[tag]) return TAG_LABELS[tag];
-  return tag.replace(/^#/, '');
+  return getTagLabel(tag);
 }
 
 function displayAtmosphere(

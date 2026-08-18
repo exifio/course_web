@@ -235,6 +235,81 @@ describe('Router / 상태 동기화 검증', () => {
   });
 });
 
+describe('Auth Flow Regression', () => {
+  test('비로그인 사용자도 홈/저장/상세에 접근할 수 있다', () => {
+    localStorage.clear();
+
+    const home = renderAt('/');
+    expect(
+      screen.getByRole('heading', { name: /오늘 어디서 뛰어볼까요/i }),
+    ).toBeInTheDocument();
+    home.unmount();
+
+    const saved = renderAt('/saved');
+    expect(
+      screen.getByRole('heading', { name: '저장한 코스' }),
+    ).toBeInTheDocument();
+    saved.unmount();
+
+    const detail = renderAt('/courses/buyongcheon');
+    expect(
+      screen.getByRole('heading', { name: '부용천 산책로 코스' }),
+    ).toBeInTheDocument();
+    detail.unmount();
+  });
+
+  test('로그인 버튼 클릭 → 모달에서 로그인 → 리마운트(새로고침) 후 인증 유지 → 로그아웃이 동작한다', async () => {
+    const user = userEvent.setup();
+    localStorage.clear();
+
+    const { unmount } = renderAt('/');
+
+    await user.click(screen.getByRole('button', { name: '로그인' }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText('이메일'), 'runner@example.com');
+    await user.type(screen.getByLabelText('비밀번호'), 'demo');
+    await user.click(within(screen.getByRole('dialog')).getByRole('button', { name: '로그인' }));
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.getByText('runner@example.com')).toBeInTheDocument();
+
+    unmount();
+    renderAt('/');
+    expect(screen.getByText('runner@example.com')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: '로그아웃' }),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: '로그아웃' }));
+    expect(screen.getByRole('button', { name: '로그인' })).toBeInTheDocument();
+  });
+
+  test('로그아웃은 auth session만 제거하고 기존 Saved 데이터는 유지한다', async () => {
+    const user = userEvent.setup();
+    localStorage.clear();
+    writeSavedCourseIds(['buyongcheon']);
+
+    renderAt('/');
+    await user.click(screen.getByRole('button', { name: '로그인' }));
+    await user.type(screen.getByLabelText('이메일'), 'runner@example.com');
+    await user.type(screen.getByLabelText('비밀번호'), 'demo');
+    await user.click(within(screen.getByRole('dialog')).getByRole('button', { name: '로그인' }));
+
+    await user.click(screen.getByRole('button', { name: '로그아웃' }));
+    expect(screen.getByRole('button', { name: '로그인' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('link', { name: '저장한 코스' }));
+    expect(
+      screen.getByRole('heading', { name: '저장한 코스' }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('부용천 산책로 코스')).toBeInTheDocument();
+    expect(
+      screen.getByText('1개의 코스가 저장되어 있습니다'),
+    ).toBeInTheDocument();
+  });
+});
+
 describe('Final Acceptance - Console', () => {
   test('주요 route 렌더링 시 console.error/warning이 발생하지 않는다', () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
