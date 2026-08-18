@@ -45,22 +45,18 @@
 }
 
 .title {
-  margin: 0 0 var(--space-16) 0;
+  margin: 0 0 var(--space-4, 4px) 0;
   font-size: var(--text-h2-font-size);
   line-height: var(--text-h2-line-height);
   font-weight: var(--text-h2-weight);
   color: var(--text-primary);
 }
 
-.notice {
-  margin: 0 0 var(--space-16) 0;
-  font-size: var(--text-body-s-font-size);
-  line-height: var(--text-body-s-line-height);
-  color: var(--color-primary-700);
-  padding: var(--space-12) var(--space-16);
-  background-color: var(--color-primary-50);
-  border: 1px solid var(--color-primary-200);
-  border-radius: var(--radius-md);
+.subtitle {
+  margin: 0 0 var(--space-20, 20px) 0;
+  font-size: var(--text-body-s-font-size, 14px);
+  line-height: var(--text-body-s-line-height, 20px);
+  color: var(--text-secondary);
 }
 
 .form {
@@ -98,6 +94,11 @@
   box-sizing: border-box;
 }
 
+.input::placeholder {
+  color: var(--gray-400);
+  font-size: var(--text-body-s-font-size);
+}
+
 .input:focus {
   outline: none;
   border-color: var(--color-primary-400);
@@ -113,6 +114,41 @@
 
 .submit {
   width: 100%;
+  margin-top: var(--space-8, 8px);
+}
+
+.switchBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8, 8px);
+  margin-top: var(--space-12, 12px);
+  padding-top: var(--space-12, 12px);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-body-s-font-size, 14px);
+  line-height: var(--text-body-s-line-height, 20px);
+}
+
+.switchPrompt {
+  color: var(--text-secondary);
+}
+
+.switchButton {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--text-body-s-font-size, 14px);
+  font-weight: 600;
+  color: var(--primary-600);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--motion-fast);
+}
+
+.switchButton:hover {
+  color: var(--primary-700);
 }
 
 @keyframes backdropFade {

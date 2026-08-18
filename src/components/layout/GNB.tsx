@@ -26,7 +26,7 @@ export default function GNB() {
             to="/saved"
             className={isSavedActive ? `${styles.link} ${styles.active}` : styles.link}
           >
-            저장한 코스
+            저장
           </NavLink>
         </nav>
         <div className={styles.right}>

@@ -82,7 +82,7 @@ describe('End-to-End User Flow Regression', () => {
     expect(readSavedCourseIds()).toContain('buyongcheon');
 
     const gnbNav = screen.getByRole('navigation', { name: '주요 메뉴' });
-    const savedNav = within(gnbNav).getByRole('link', { name: '저장한 코스' });
+    const savedNav = within(gnbNav).getByRole('link', { name: '저장' });
     await user.click(savedNav);
 
     expect(
@@ -170,7 +170,7 @@ describe('Router / 상태 동기화 검증', () => {
 
     const gnbNav = screen.getByRole('navigation', { name: '주요 메뉴' });
     await user.click(
-      within(gnbNav).getByRole('link', { name: '저장한 코스' }),
+      within(gnbNav).getByRole('link', { name: '저장' }),
     );
 
     expect(
@@ -194,7 +194,7 @@ describe('Router / 상태 동기화 검증', () => {
 
     const gnbNav = screen.getByRole('navigation', { name: '주요 메뉴' });
     await user.click(
-      within(gnbNav).getByRole('link', { name: '저장한 코스' }),
+      within(gnbNav).getByRole('link', { name: '저장' }),
     );
 
     expect(screen.getByText('부용천 산책로 코스')).toBeInTheDocument();
@@ -299,7 +299,7 @@ describe('Auth Flow Regression', () => {
     await user.click(screen.getByRole('button', { name: '로그아웃' }));
     expect(screen.getByRole('button', { name: '로그인' })).toBeInTheDocument();
 
-    await user.click(screen.getByRole('link', { name: '저장한 코스' }));
+    await user.click(screen.getByRole('link', { name: '저장' }));
     expect(
       screen.getByRole('heading', { name: '저장한 코스' }),
     ).toBeInTheDocument();
@@ -345,7 +345,7 @@ describe('GNB Scope Guard', () => {
     expect(within(gnb).getByText('RunRoute')).toBeInTheDocument();
     expect(within(gnb).getByRole('link', { name: '홈' })).toBeInTheDocument();
     expect(
-      within(gnb).getByRole('link', { name: '저장한 코스' }),
+      within(gnb).getByRole('link', { name: '저장' }),
     ).toBeInTheDocument();
   });
 });

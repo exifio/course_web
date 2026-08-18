@@ -293,7 +293,7 @@ async function runRegressionQA() {
     record('router-history', 'Navigated from / to /courses/buyongcheon via link', page.url().endsWith('/courses/buyongcheon'));
 
     // Click on Saved link in header
-    const savedHeaderLink = page.getByRole('link', { name: '저장한 코스' });
+    const savedHeaderLink = page.getByRole('link', { name: '저장' });
     await savedHeaderLink.click();
     await page.waitForURL('**/saved');
     record('router-history', 'Navigated to /saved via header link', page.url().endsWith('/saved'));
